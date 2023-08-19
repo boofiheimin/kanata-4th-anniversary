@@ -1,8 +1,10 @@
 "use client";
 import { reverse } from "lodash";
 import moment from "moment";
-import { useCallback, useEffect, useState } from "react";
-import { Virtuoso } from "react-virtuoso";
+import { useRef, useState } from "react";
+import { Virtuoso, VirtuosoHandle } from "react-virtuoso";
+import DatePicker from "tailwind-datepicker-react";
+import Search from "./Search";
 import TimelineEvent from "./TimelineEvent";
 
 export interface EventContent {
@@ -32,30 +34,54 @@ const genData = (): Event[] => {
 };
 
 const Timeline = () => {
-  const [data, setData] = useState<Event[]>([]);
-  const [page, setPage] = useState(0);
   const fullData = genData();
-  const loadMore = useCallback(() => {
-    if (data.length < 400) {
-      setData((data) => [
-        ...data,
-        ...fullData.slice(page * 100, page * 100 + 100),
-      ]);
-      setPage((page) => page + 1);
-    }
-  }, [setPage, setData, page, data.length, fullData]);
-  useEffect(() => {
-    loadMore();
-  }, []);
+  const virtuoso = useRef<VirtuosoHandle>(null);
+
+  const onSearch = (searchTerm: string) => {
+    const index = fullData.findIndex(({ name }) =>
+      name.match(new RegExp(`${searchTerm}`))
+    );
+    virtuoso?.current?.scrollToIndex({
+      index,
+      behavior: "smooth",
+    });
+  };
+
+  const [show, setShow] = useState<boolean>(false);
+  const handleChange = (selectedDate: Date) => {
+    const index = fullData.findIndex(({ date }) =>
+      moment(date).isSame(selectedDate, "day")
+    );
+    virtuoso?.current?.scrollToIndex({
+      index,
+      behavior: "smooth",
+    });
+  };
+  const handleClose = (state: boolean) => {
+    setShow(state);
+  };
 
   return (
-    <Virtuoso
-      style={{ height: "100%", width: "100%" }}
-      data={data}
-      overscan={100}
-      endReached={loadMore}
-      itemContent={(index, data) => <TimelineEvent event={data} />}
-    ></Virtuoso>
+    <div className="flex flex-col h-full w-full">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <div className="mr-4">Go to:</div>
+          <DatePicker
+            classNames="w-72"
+            show={show}
+            setShow={handleClose}
+            onChange={handleChange}
+          ></DatePicker>
+        </div>
+        <Search onSearch={onSearch}></Search>
+      </div>
+      <Virtuoso
+        ref={virtuoso}
+        style={{ height: "100%", width: "100%", flexGrow: 1 }}
+        data={fullData}
+        itemContent={(index, data) => <TimelineEvent event={data} />}
+      ></Virtuoso>
+    </div>
   );
 };
 
