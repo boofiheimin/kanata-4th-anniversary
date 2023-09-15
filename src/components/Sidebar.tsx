@@ -19,6 +19,11 @@ const Sidebar = () => {
       current: isCurrent("/timeline", segment),
     },
     {
+      name: "Timeline2",
+      href: "/timeline2",
+      current: isCurrent("/timeline2", segment),
+    },
+    {
       name: "Discography",
       href: "/discography",
       current: isCurrent("/discography", segment),

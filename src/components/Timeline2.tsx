@@ -4,29 +4,12 @@ import { Virtuoso, VirtuosoHandle } from "react-virtuoso";
 import DatePicker from "tailwind-datepicker-react";
 
 import Search from "./Search";
-import TimelineEvent from "./TimelineEvent";
 
 import { TimelineType } from "@/timeline/timeline";
 import { findClosestDate } from "@/utils/util";
 import { timeline } from "../timeline/timeline_data";
-
-export interface EventContent {
-  explanation?: string;
-  youtubeInfo?: {
-    videoId: string;
-    timestamp?: number;
-  };
-  thumbnail?: string;
-  link?: string;
-  tweetId?: string;
-}
-
-export interface Event {
-  name: string;
-  date: Date;
-  type: TimelineType;
-  content?: EventContent;
-}
+import { Event } from "./Timeline";
+import TimelineEvent2 from "./TimelineEvent2";
 
 const genData = (): Event[] => {
   return timeline.map((e) => {
@@ -38,7 +21,7 @@ const genData = (): Event[] => {
   });
 };
 
-const Timeline = () => {
+const Timeline2 = () => {
   const fullData = genData();
   const dateArr = fullData.map(({ date }) => date);
   const virtuoso = useRef<VirtuosoHandle>(null);
@@ -66,7 +49,7 @@ const Timeline = () => {
   return (
     <div className="flex flex-col h-full w-full">
       <div className="flex items-center justify-between">
-        <div className="flex items-center p-2">
+        <div className="flex items-center">
           <div className="mr-4">Go to:</div>
           <DatePicker
             classNames="w-72"
@@ -81,10 +64,10 @@ const Timeline = () => {
         ref={virtuoso}
         style={{ height: "100%", width: "100%", flexGrow: 1 }}
         data={fullData}
-        itemContent={(index, data) => <TimelineEvent event={data} />}
+        itemContent={(index, data) => <TimelineEvent2 event={data} />}
       ></Virtuoso>
     </div>
   );
 };
 
-export default Timeline;
+export default Timeline2;

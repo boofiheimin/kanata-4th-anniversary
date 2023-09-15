@@ -4,7 +4,6 @@ import classNames from "classnames";
 import moment from "moment";
 import Image from "next/image";
 import { MouseEvent, useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Reveal from "./Reveal";
 import { Event } from "./Timeline";
 import TimelineEventContent from "./TimelineEventContent";
@@ -13,7 +12,7 @@ interface TimelineEvent {
   event: Event;
 }
 
-const TimelineEvent = (props: TimelineEvent) => {
+const TimelineEvent2 = (props: TimelineEvent) => {
   const [open, setOpen] = useState(false);
   const {
     event: { name, type, content, date },
@@ -26,16 +25,15 @@ const TimelineEvent = (props: TimelineEvent) => {
       setOpen((v) => !v);
     }
   };
-
+  // version 2:
   return (
     <Reveal>
-      <div className="p-2">
+      <div className="w-full p-2 flex items-center justify-center">
         <div
           className={classNames(
-            "timelineEvent",
-            clickable ? "cursor-pointer" : ""
+            "shadow-md border rounded bg-white bg-opacity-50"
           )}
-          onClick={onOpen}
+          style={{ width: 700 }}
         >
           <div className="flex items-center">
             <Image
@@ -51,12 +49,14 @@ const TimelineEvent = (props: TimelineEvent) => {
                 </div>
                 <div className="mr-4 text-white">{name}</div>
               </div>
-              {clickable && (open ? <FaChevronUp /> : <FaChevronDown />)}
             </div>
           </div>
-          {open && (
-            <div className="p-3">
-              <TimelineEventContent {...content}></TimelineEventContent>
+          {content && (
+            <div className="p-3 flex justify-center items-center">
+              <TimelineEventContent
+                {...content}
+                autoPlay={false}
+              ></TimelineEventContent>
             </div>
           )}
         </div>
@@ -65,4 +65,4 @@ const TimelineEvent = (props: TimelineEvent) => {
   );
 };
 
-export default TimelineEvent;
+export default TimelineEvent2;

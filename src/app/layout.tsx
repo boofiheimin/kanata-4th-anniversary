@@ -1,10 +1,33 @@
 import Sidebar from "@/components/Sidebar";
 import classnames from "classnames";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const neutraFont = localFont({
+  src: [
+    {
+      path: "../fonts/neutra_text.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/neutra_text_italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../fonts/neutra_text_bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/neutra_text_bolditalic.otf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+});
 
 export const metadata = {
   title: "Amane Kanata's 4th Anniversary Project",
@@ -16,9 +39,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const bodyClass = classnames(inter.className, "flex mx-auto w-full");
+  const bodyClass = classnames(neutraFont.className, "flex mx-auto w-full");
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <Script src="../path/to/flowbite/dist/flowbite.min.js"></Script>
       <Script src="../path/to/flowbite/dist/datepicker.js"></Script>
       <body className={bodyClass}>
