@@ -24,8 +24,8 @@ const Reveal = ({ children, width = "fit-content" }: Props) => {
       <motion.div whileHover={{ scale: 1.01 }} transition={{ duration: 0.1 }}>
         <motion.div
           variants={{
-            hidden: { opacity: 0, x: -75 },
-            visible: { opacity: 1, x: 0 },
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
           }}
           initial="hidden"
           animate={control}

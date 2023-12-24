@@ -2,11 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-.timelineEvent {
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.4) 10%,
-    rgba(255, 255, 255, 0) 70%
-  );
+.message {
+  width: 350px;
 }
+
+.modal-size {
+  height: 80vh;
+}
+
+/* @media only screen and (max-width: 1440px) {
+  .message {
+    width: min(30%, 300px);
+  }
+}
+
+@media only screen and (max-width: 1096px) {
+  .message {
+    width: 100%;
+  }
+} */
