@@ -40,7 +40,7 @@ const Grid = () => {
   const [items, setItems] = useState(() => getItems(0));
   return (
     <MasonryInfiniteGrid
-      gap={10}
+      gap={20}
       align="center"
       onRequestAppend={(e) => {
         const nextGroupKey = (+e.groupKey! || 0) + 1;
