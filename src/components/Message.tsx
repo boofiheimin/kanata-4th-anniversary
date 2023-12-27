@@ -13,15 +13,23 @@ import {
 import Image from "next/image";
 import Reveal from "./Reveal";
 
-const Message = ({ submission }: { submission: Submission }) => {
+const Message = ({
+  submission,
+  lang,
+}: {
+  submission: Submission;
+  lang?: string;
+}) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const tooltipText = lang === "ja" ? "クリックで拡大" : "Click to enlarge";
+
   return (
     <>
       <Reveal>
         <Card className="message">
           <CardBody>
             {submission.art && (
-              <Tooltip showArrow={true} content="Click to enlarge">
+              <Tooltip showArrow={true} content={tooltipText}>
                 <div
                   style={{
                     position: "relative",

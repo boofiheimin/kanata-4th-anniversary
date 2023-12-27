@@ -305,7 +305,6 @@ export const data: Submission[] = [
     name: "gupipi",
     message:
       "４周年おめでとうございまーす！自分にとってかなたんは人生初の推しです！推しを作ることでこんなに人生が楽しくなるとは思わなんだ！これからも推して推して推しまくりまーす！",
-    art: "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTW8tC_DsBFei9OB5AI3IahatZ1kdPqRqNprPmMrUM5Dbg3C1Vbs8_M0NAPhPOeUfE5dhtbbr2Ri57WIYPqTOWBZ6BDlQ=s1600",
   },
   {
     name: "Ppang",
@@ -365,36 +364,3 @@ export const data: Submission[] = [
     art: "https://lh3.googleusercontent.com/drive-viewer/AEYmBYQYfYYAy1j8ETBXCWzwS-xHW2IVf8Eor17g7pBeOcR3xt2iuYYZPQ8mAb_Y7NAplZpqOU5Y7J-j9qO9LyGmiQzadwr0yA=s1600",
   },
 ];
-
-export const genTestData = (): Submission[] => {
-  const res = [];
-
-  const names = ["HeiminA", "HeiminB", "HEIMINC"];
-
-  const messages = [
-    `
-    4周年おめでとう!今年はお疲れ様でした!!私は日本語が話せないので翻訳機を使いましたが、大丈夫だといいのですが！あなたは私のおしです!! 私はあなたの歌が大好きで、あなたは私にとてもインスピレーションを与えてくれます！私の作品を楽しんでいただければ幸いです!♪
-Happy 4th anniversary!!! Thank you for your hard work this year!! I don’t speak Japanese so I used a translator, but I hope it’s okay!! I love your songs and you inspire me a lot!! I hope you’ll enjoy my artwork!♪
-You are my oshi!! ☆
-    `,
-    `
-    ど真ん中一直線! I'm always with you!
-    `,
-    `
-    I enjoy your songs, streams and covers very much, and it brightens my day whenever I listen or watch your content! Thank you for being yourself, and keep working hard everyday. 
-
-Sending love from an American heimin!
-    `,
-  ];
-
-  for (let i = 0; i < 100; i++) {
-    const randomName = names[Math.floor(Math.random() * names.length)];
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-
-    res.push({
-      name: randomName,
-      message: randomMessage,
-    });
-  }
-  return res;
-};

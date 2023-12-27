@@ -21,7 +21,7 @@ export default function Home({
         )}
       </div>
       <div className="p-5">
-        <Grid></Grid>
+        <Grid lang={lang}></Grid>
       </div>
     </div>
   );

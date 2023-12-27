@@ -35,7 +35,7 @@ function getItems(nextGroupKey: number) {
   return nextItems;
 }
 
-const Grid = () => {
+const Grid = ({ lang }: { lang?: string }) => {
   const [page, setPage] = useState<number>(() => 0);
   const [items, setItems] = useState(() => getItems(0));
   return (
@@ -54,6 +54,7 @@ const Grid = () => {
           data-grid-groupkey={item.groupKey}
           key={item.key}
           submission={item.submission}
+          lang={lang}
         ></Message>
       ))}
     </MasonryInfiniteGrid>
